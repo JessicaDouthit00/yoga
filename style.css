@@ -1,0 +1,121 @@
+/* Base Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fffdd0; /* Pale yellow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.header {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+  background-color: #ffcc00;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.subheader {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #666;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 80%;
+}
+
+.grid-item {
+  background-color: #000;
+  border: 1px solid #ddd;
+  height: 200px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.grid-item:hover {
+  background-color: #222;
+}
+
+.pose-name {
+  color: #fffdd0; /* Pale yellow */
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Detail Page Styles */
+.detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.pose-image img {
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.pose-info {
+  max-width: 400px;
+}
+
+.pose-info h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.pose-info p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Back Button */
+.back-button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  background-color: #ffcc00;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(255, 204, 0, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #e6b800;
+  box-shadow: 0 6px 12px rgba(230, 184, 0, 0.8);
+}
+
+

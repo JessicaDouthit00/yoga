@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga Pose Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="detail-container">
+    <div class="pose-image">
+      <img id="poseImage" src="images/placeholder.jpg" alt="Yoga Pose" />
+    </div>
+    <div class="pose-info">
+      <h2 id="poseTitle">Pose Title</h2>
+      <p id="poseDescription">Pose description will appear here.</p>
+      <button onclick="goBack()" class="back-button">← Back to Grid</button>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const poseId = urlParams.get('id');
+
+    const poses = {
+      1: {
+        name: "Mountain Pose",
+        image: "images/mountain.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Improves posture",
+          "Promotes body awareness",
+          "Strengthens thighs, knees, and ankles"
+        ],
+        description: "Stand tall with feet together, shoulders relaxed, and arms at your sides. Distribute your weight evenly through your feet."
+      },
+      2: {
+        name: "Downward-Facing Dog",
+        image: "images/downwarddog.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Stretches hamstrings and calves",
+          "Builds upper body strength",
+          "Relieves stress and calms the brain"
+        ],
+        description: "Start on all fours, lift your hips, and straighten your legs to form an inverted V shape."
+      },
+      3: {
+        name: "Warrior I",
+        image: "images/warrior1.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Strengthens legs and arms",
+          "Improves focus and balance",
+          "Opens the chest and lungs"
+        ],
+        description: "Lunge one foot forward with the back leg straight and arms raised overhead."
+      },
+      4: {
+        name: "Warrior II",
+        image: "images/warrior2.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Builds stamina",
+          "Strengthens the lower body",
+          "Improves stability and focus"
+        ],
+        description: "From Warrior I, open your arms to the sides and turn your torso to face sideways."
+      },
+      5: {
+        name: "Triangle Pose",
+        image: "images/triangle.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Stretches legs and spine",
+          "Stimulates abdominal organs",
+          "Improves digestion"
+        ],
+        description: "Straighten both legs, reach forward, and tilt your upper body to one side, touching the floor or shin."
+      },
+      6: {
+        name: "Tree Pose",
+        image: "images/tree.jpg",
+        difficulty: "Beginner",
+        benefits: [
+          "Improves balance and stability",
+          "Strengthens thighs, calves, and spine",
+          "Builds concentration"
+        ],
+        description: "Stand on one leg and place the sole of the other foot on your inner thigh or calf. Balance and bring your palms together."
+      },
+      7: {
+        name: "Bridge Pose",
+        image: "images/bridge.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Stretches the chest and spine",
+          "Strengthens the back, glutes, and hamstrings",
+          "Reduces anxiety and fatigue"
+        ],
+        description: "Lie on your back with knees bent and feet flat. Lift your hips toward the ceiling while pressing into your feet."
+      },
+      8: {
+        name: "Child’s Pose",
+        image: "images/child.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Gently stretches hips, thighs, and ankles",
+          "Relieves back and neck pain",
+          "Promotes relaxation"
+        ],
+        description: "Sit on your heels, fold forward, and stretch your arms in front or alongside your body."
+      },
+      9: {
+        name: "Seated Forward Bend",
+        image: "images/seatedforwardbend.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Stretches spine and hamstrings",
+          "Improves digestion",
+          "Calms the mind"
+        ],
+        description: "Sit with your legs extended and reach toward your toes, keeping your back straight."
+      },
+      10: {
+        name: "Cobra Pose",
+        image: "images/cobra.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Strengthens the spine",
+          "Opens the chest and shoulders",
+          "Improves flexibility"
+        ],
+        description: "Lie on your stomach and press into your hands to lift your chest, keeping elbows bent and close to your body."
+      },
+      11: {
+        name: "Camel Pose",
+        image: "images/camel.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Stretches the entire front of the body",
+          "Improves posture",
+          "Stimulates abdominal organs"
+        ],
+        description: "Kneel and place your hands on your heels while arching your back and pushing your hips forward."
+      },
+      12: {
+        name: "Cat-Cow Pose",
+        image: "images/catcow.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Improves spine flexibility",
+          "Warms up the back",
+          "Promotes coordination and breath awareness"
+        ],
+        description: "Alternate between arching your back (cat) and dipping your spine (cow) while on all fours."
+      },
+      13: {
+        name: "Boat Pose",
+        image: "images/boat.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Strengthens core and hip flexors",
+          "Improves balance",
+          "Stimulates kidneys and thyroid"
+        ],
+        description: "Sit on the floor, lift your legs and torso into a V shape, and stretch your arms forward."
+      },
+      14: {
+        name: "Plank Pose",
+        image: "images/plank.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Strengthens arms, wrists, and spine",
+          "Tones the abdomen",
+          "Improves posture"
+        ],
+        description: "Hold your body in a straight line from head to heels, supported by your hands and toes."
+      },
+      15: {
+        name: "Chair Pose",
+        image: "images/chair.JPG",
+        difficulty: "Intermediate",
+        benefits: [
+          "Strengthens thighs, calves, and spine",
+          "Improves balance",
+          "Stimulates the heart and diaphragm"
+        ],
+        description: "Bend your knees and sit back as if in a chair, while keeping your arms raised overhead."
+      },
+      16: {
+        name: "Corpse Pose",
+        image: "images/corpse.JPG",
+        difficulty: "Beginner",
+        benefits: [
+          "Promotes total relaxation",
+          "Reduces stress",
+          "Calms the nervous system"
+        ],
+        description: "Lie flat on your back with arms at your sides, palms up, and relax every part of your body."
+      }
+    };
+
+    const pose = poses[poseId];
+
+    if (pose) {
+      document.getElementById('poseImage').src = pose.image;
+      document.getElementById('poseImage').onerror = function () {
+        this.src = 'images/placeholder.jpg';
+      };
+      document.getElementById('poseTitle').textContent = pose.name;
+
+      const benefitsList = pose.benefits.map(b => `<li>${b}</li>`).join('');
+      document.getElementById('poseDescription').innerHTML = `
+        <strong>Difficulty:</strong> ${pose.difficulty}<br/><br/>
+        ${pose.description}<br/><br/>
+        <strong>Benefits:</strong><ul>${benefitsList}</ul>
+      `;
+    } else {
+      document.getElementById('poseTitle').textContent = "Unknown Pose";
+      document.getElementById('poseDescription').textContent = "Pose details not found.";
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+

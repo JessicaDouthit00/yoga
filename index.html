@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga Pose Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="header">Yoga Pose Review Tool</div>
+  <div class="subheader">Created by Jessica Douthit</div>
+  <div class="subheader">Berea College Department of Health and Human Performance</div>
+
+  <div class="container" id="poseGrid"></div>
+
+  <script>
+    const poses = {
+      1: "Mountain Pose",
+      2: "Downward-Facing Dog",
+      3: "Warrior I",
+      4: "Warrior II",
+      5: "Triangle Pose",
+      6: "Tree Pose",
+      7: "Bridge Pose",
+      8: "Child’s Pose",
+      9: "Seated Forward Bend",
+      10: "Cobra Pose",
+      11: "Camel Pose",
+      12: "Cat-Cow Pose",
+      13: "Boat Pose",
+      14: "Plank Pose",
+      15: "Chair Pose",
+      16: "Corpse Pose"
+    };
+
+    const container = document.getElementById('poseGrid');
+    for (let i = 1; i <= 16; i++) {
+      const div = document.createElement('div');
+      div.className = 'grid-item';
+      div.onclick = function () {
+        goToPosePage(i);
+      };
+
+      // Create pose name div and add text
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'pose-name';
+      nameDiv.textContent = poses[i];
+
+      div.appendChild(nameDiv);
+      container.appendChild(div);
+    }
+
+    function goToPosePage(poseId) {
+      window.location.href = 'pose.html?id=' + poseId;
+    }
+  </script>
+</body>
+</html>
+
