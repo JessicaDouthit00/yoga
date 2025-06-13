@@ -554,200 +554,178 @@
     <div class="container" id="poseGrid"></div>
   </div>
 
-  <script>
-    const poses = {
-      1: { name: "Mountain Pose", icon: "🏔️", difficulty: "beginner", description: "Foundation pose for proper alignment and grounding, connecting earth and sky" },
-      2: { name: "Downward-Facing Dog", icon: "🐕", difficulty: "beginner", description: "Energizing inversion that strengthens and stretches the entire body" },
-      3: { name: "Warrior I", icon: "⚔️", difficulty: "beginner", description: "Powerful standing pose building strength, focus, and inner warrior spirit" },
-      4: { name: "Warrior II", icon: "🛡️", difficulty: "intermediate", description: "Dynamic pose improving stamina, concentration, and graceful power" },
-      5: { name: "Triangle Pose", icon: "📐", difficulty: "beginner", description: "Lateral stretch opening hips, strengthening legs, and creating sacred geometry" },
-      6: { name: "Tree Pose", icon: "🌳", difficulty: "intermediate", description: "Balance pose cultivating focus, stability, and rooted presence" },
-      7: { name: "Bridge Pose", icon: "🌉", difficulty: "intermediate", description: "Heart opening backbend strengthening glutes and opening the chest" },
-      8: { name: "Child's Pose", icon: "🧘", difficulty: "beginner", description: "Restorative pose for deep relaxation and inner contemplation" },
-      9: { name: "Seated Forward Bend", icon: "🙇", difficulty: "intermediate", description: "Calming forward fold stretching spine and cultivating introspection" },
-      10: { name: "Cobra Pose", icon: "🐍", difficulty: "beginner", description: "Gentle backbend opening chest, strengthening back, awakening energy" },
-      11: { name: "Camel Pose", icon: "🐪", difficulty: "advanced", description: "Deep backbend opening heart chakra and creating spinal freedom" },
-      12: { name: "Cat-Cow Pose", icon: "🐱", difficulty: "beginner", description: "Flowing movement warming spine, awakening core energy" },
-      13: { name: "Boat Pose", icon: "⛵", difficulty: "intermediate", description: "Core strengthening pose building abdominal power and balance" },
-      14: { name: "Plank Pose", icon: "💪", difficulty: "intermediate", description: "Full-body strengthener building core stability and integration" },
-      15: { name: "Chair Pose", icon: "🪑", difficulty: "intermediate", description: "Powerful standing pose strengthening legs and building endurance" },
-      16: { name: "Corpse Pose", icon: "💤", difficulty: "beginner", description: "Final relaxation pose for complete mind-body integration and peace" }
-    };
+  <!-- Everything before remains unchanged... -->
+<div class="container" id="poseGrid"></div>
+</div>
 
-    // Custom Cursor
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
-    
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      
+<script>
+  const poses = {
+    1: { name: "Mountain Pose", icon: "🏔️", difficulty: "beginner", description: "Foundation pose for proper alignment and grounding, connecting earth and sky" },
+    2: { name: "Downward-Facing Dog", icon: "🐕", difficulty: "beginner", description: "Energizing inversion that strengthens and stretches the entire body" },
+    3: { name: "Warrior I", icon: "⚔️", difficulty: "beginner", description: "Powerful standing pose building strength, focus, and inner warrior spirit" },
+    4: { name: "Warrior II", icon: "🛡️", difficulty: "intermediate", description: "Dynamic pose improving stamina, concentration, and graceful power" },
+    5: { name: "Triangle Pose", icon: "📐", difficulty: "beginner", description: "Lateral stretch opening hips, strengthening legs, and creating sacred geometry" },
+    6: { name: "Tree Pose", icon: "🌳", difficulty: "intermediate", description: "Balance pose cultivating focus, stability, and rooted presence" },
+    7: { name: "Bridge Pose", icon: "🌉", difficulty: "intermediate", description: "Heart opening backbend strengthening glutes and opening the chest" },
+    8: { name: "Child's Pose", icon: "🧘", difficulty: "beginner", description: "Restorative pose for deep relaxation and inner contemplation" },
+    9: { name: "Seated Forward Bend", icon: "🙇", difficulty: "intermediate", description: "Calming forward fold stretching spine and cultivating introspection" },
+    10: { name: "Cobra Pose", icon: "🐍", difficulty: "beginner", description: "Gentle backbend opening chest, strengthening back, awakening energy" },
+    11: { name: "Camel Pose", icon: "🐪", difficulty: "advanced", description: "Deep backbend opening heart chakra and creating spinal freedom" },
+    12: { name: "Cat-Cow Pose", icon: "🐱", difficulty: "beginner", description: "Flowing movement warming spine, awakening core energy" },
+    13: { name: "Boat Pose", icon: "⛵", difficulty: "intermediate", description: "Core strengthening pose building abdominal power and balance" },
+    14: { name: "Plank Pose", icon: "💪", difficulty: "intermediate", description: "Full-body strengthener building core stability and integration" },
+    15: { name: "Chair Pose", icon: "🪑", difficulty: "intermediate", description: "Powerful standing pose strengthening legs and building endurance" },
+    16: { name: "Corpse Pose", icon: "💤", difficulty: "beginner", description: "Final relaxation pose for complete mind-body integration and peace" }
+  };
+
+  // Custom Cursor
+  const cursor = document.querySelector('.cursor');
+  const cursorFollower = document.querySelector('.cursor-follower');
+
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+
+    setTimeout(() => {
+      cursorFollower.style.left = e.clientX + 'px';
+      cursorFollower.style.top = e.clientY + 'px';
+    }, 100);
+  });
+
+  // Holographic Particles
+  function createHoloParticles() {
+    const container = document.getElementById('particles');
+
+    setInterval(() => {
+      const particle = document.createElement('div');
+      particle.className = 'holo-particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+
+      const colors = ['#ff77e9', '#77ffe9', '#e977ff', '#ffee77'];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+      container.appendChild(particle);
+
       setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-      }, 100);
+        particle.remove();
+      }, 12000);
+    }, 300);
+  }
+
+  // Create pose grid
+  function createPoseGrid(filteredPoses = poses) {
+    const container = document.getElementById('poseGrid');
+    container.innerHTML = '';
+
+    Object.keys(filteredPoses).forEach((key, index) => {
+      const pose = filteredPoses[key];
+      const div = document.createElement('div');
+      div.className = 'grid-item';
+      div.style.animationDelay = (index * 0.1) + 's';
+
+      div.innerHTML = `
+        <div class="difficulty-badge ${pose.difficulty}">${pose.difficulty}</div>
+        <div class="pose-icon">${pose.icon}</div>
+        <div class="pose-name">${pose.name}</div>
+        <div class="pose-description">${pose.description}</div>
+      `;
+
+      // ✅ Navigate to pose.html?id=...
+      div.addEventListener('click', () => {
+        window.location.href = \`pose.html?id=\${key}\`;
+      });
+
+      container.appendChild(div);
     });
+  }
 
-    // Holographic Particles
-    function createHoloParticles() {
-      const container = document.getElementById('particles');
-      
-      setInterval(() => {
-        const particle = document.createElement('div');
-        particle.className = 'holo-particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
-        particle.style.animationDelay = Math.random() * 2 + 's';
-        
-        const colors = ['#ff77e9', '#77ffe9', '#e977ff', '#ffee77'];
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
-        container.appendChild(particle);
-        
-        setTimeout(() => {
-          particle.remove();
-        }, 12000);
-      }, 300);
-    }
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    // Create pose grid with enhanced animations
-    function createPoseGrid(filteredPoses = poses) {
+      const filter = btn.dataset.filter;
+      const filtered = filter === 'all' ? poses :
+        Object.keys(poses).reduce((acc, key) => {
+          if (poses[key].difficulty === filter) {
+            acc[key] = poses[key];
+          }
+          return acc;
+        }, {});
+
       const container = document.getElementById('poseGrid');
-      container.innerHTML = '';
-      
-      Object.keys(filteredPoses).forEach((key, index) => {
-        const pose = filteredPoses[key];
-        const div = document.createElement('div');
-        div.className = 'grid-item';
-        div.style.animationDelay = (index * 0.1) + 's';
-        
-        div.innerHTML = `
-          <div class="difficulty-badge ${pose.difficulty}">${pose.difficulty}</div>
-          <div class="pose-icon">${pose.icon}</div>
-          <div class="pose-name">${pose.name}</div>
-          <div class="pose-description">${pose.description}</div>
-        `;
+      container.style.opacity = '0';
+      container.style.transform = 'translateY(20px)';
 
-        div.addEventListener('click', () => {
-          // Enhanced click effect
-          div.style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            div.style.transform = '';
-            // Simulate navigation with a more elegant alert
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-              position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-              background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
-              color: white; padding: 2rem; border-radius: 20px; z-index: 10000;
-              border: 1px solid rgba(255,255,255,0.2);
-              box-shadow: 0 50px 100px rgba(0,0,0,0.5);
-            `;
-            modal.innerHTML = `
-              <h3 style="margin-bottom: 1rem; font-family: 'Playfair Display', serif;">
-                Entering ${pose.name} Experience...
-              </h3>
-              <p style="opacity: 0.8;">Preparing your immersive pose journey</p>
-            `;
-            document.body.appendChild(modal);
-            setTimeout(() => modal.remove(), 2000);
-          }, 150);
-        });
+      setTimeout(() => {
+        createPoseGrid(filtered);
+        container.style.opacity = '1';
+        container.style.transform = 'translateY(0)';
+      }, 300);
+    });
+  });
 
-        container.appendChild(div);
-      });
+  // Search input
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const filtered = Object.keys(poses).reduce((acc, key) => {
+      const pose = poses[key];
+      if (pose.name.toLowerCase().includes(query) ||
+          pose.description.toLowerCase().includes(query) ||
+          pose.difficulty.toLowerCase().includes(query)) {
+        acc[key] = pose;
+      }
+      return acc;
+    }, {});
+
+    createPoseGrid(filtered);
+  });
+
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.querySelector('.scroll-progress').style.width = scrolled + '%';
+  });
+
+  // Parallax orbs
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    document.querySelectorAll('.light-orb').forEach((orb, index) => {
+      const speed = 0.5 + (index * 0.2);
+      orb.style.transform = \`translate3d(0, \${scrolled * speed}px, 0)\`;
+    });
+  });
+
+  // Parallax mouse effect
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+
+    document.querySelectorAll('.light-orb').forEach((orb, index) => {
+      const speed = 0.02 + (index * 0.01);
+      const xOffset = (mouseX - 0.5) * speed * 100;
+      const yOffset = (mouseY - 0.5) * speed * 100;
+      orb.style.transform += \` translate(\${xOffset}px, \${yOffset}px)\`;
+    });
+  });
+
+  // Cursor hover effects
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('.grid-item, .filter-btn, .search-input')) {
+      cursor.style.transform = 'scale(1.5)';
+      cursorFollower.style.transform = 'scale(1.5)';
+    } else {
+      cursor.style.transform = 'scale(1)';
+      cursorFollower.style.transform = 'scale(1)';
     }
+  });
 
-    // Enhanced filter functionality
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        const filter = btn.dataset.filter;
-        const filtered = filter === 'all' ? poses : 
-          Object.keys(poses).reduce((acc, key) => {
-            if (poses[key].difficulty === filter) {
-              acc[key] = poses[key];
-            }
-            return acc;
-          }, {});
-        
-        // Fade out and fade in effect
-        const container = document.getElementById('poseGrid');
-        container.style.opacity = '0';
-        container.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-          createPoseGrid(filtered);
-          container.style.opacity = '1';
-          container.style.transform = 'translateY(0)';
-        }, 300);
-      });
-    });
-
-    // Search functionality
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const filtered = Object.keys(poses).reduce((acc, key) => {
-        const pose = poses[key];
-        if (pose.name.toLowerCase().includes(query) || 
-            pose.description.toLowerCase().includes(query) ||
-            pose.difficulty.toLowerCase().includes(query)) {
-          acc[key] = pose;
-        }
-        return acc;
-      }, {});
-      
-      createPoseGrid(filtered);
-    });
-
-    // Scroll progress indicator
-    window.addEventListener('scroll', () => {
-      const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      document.querySelector('.scroll-progress').style.width = scrolled + '%';
-    });
-
-    // Parallax effect for orbs
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const orbs = document.querySelectorAll('.light-orb');
-      
-      orbs.forEach((orb, index) => {
-        const speed = 0.5 + (index * 0.2);
-        orb.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
-      });
-    });
-
-    // Initialize everything
-    createHoloParticles();
-    createPoseGrid();
-
-    // Enhanced mouse interactions
-    document.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX / window.innerWidth;
-      const mouseY = e.clientY / window.innerHeight;
-      
-      // Parallax effect on orbs
-      document.querySelectorAll('.light-orb').forEach((orb, index) => {
-        const speed = 0.02 + (index * 0.01);
-        const xOffset = (mouseX - 0.5) * speed * 100;
-        const yOffset = (mouseY - 0.5) * speed * 100;
-        orb.style.transform += ` translate(${xOffset}px, ${yOffset}px)`;
-      });
-    });
-
-    // Cursor interactions
-    document.querySelectorAll('.grid-item, .filter-btn, .search-input').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(1.5)';
-        cursorFollower.style.transform = 'scale(1.5)';
-      });
-      
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursorFollower.style.transform = 'scale(1)';
-      });
-    });
-  </script>
+  // Init
+  createHoloParticles();
+  createPoseGrid();
+</script>
 </body>
 </html>
