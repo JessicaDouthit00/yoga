@@ -3,18 +3,561 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Yoga Pose Details</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Mountain Pose - Transcendent Yoga</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      cursor: none;
+    }
+
+    /* Custom Cursor */
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 100%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+      mix-blend-mode: difference;
+    }
+
+    .cursor-follower {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      mix-blend-mode: difference;
+    }
+
+    /* Ethereal Background */
+    .ethereal-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 80%, rgba(255, 206, 119, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 20%, rgba(119, 255, 198, 0.2) 0%, transparent 50%),
+        linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+      background-size: 200% 200%;
+      animation: etherealFlow 20s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes etherealFlow {
+      0%, 100% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 50% 100%; }
+      75% { background-position: 0% 100%; }
+    }
+
+    /* Morphing Light Orbs */
+    .light-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.6;
+      animation: orbFloat 15s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .orb-1 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,119,198,0.4) 0%, transparent 70%);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(119,255,198,0.3) 0%, transparent 70%);
+      top: 60%;
+      right: 10%;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(255,206,119,0.5) 0%, transparent 70%);
+      bottom: 20%;
+      left: 30%;
+      animation-delay: -10s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+      }
+      25% { 
+        transform: translate(100px, -50px) scale(1.2);
+        opacity: 0.8;
+      }
+      50% { 
+        transform: translate(-50px, 100px) scale(0.8);
+        opacity: 0.4;
+      }
+      75% { 
+        transform: translate(150px, 50px) scale(1.1);
+        opacity: 0.7;
+      }
+    }
+
+    /* Holographic Particles */
+    .particle-system {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .holo-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: linear-gradient(45deg, #ff77e9, #77ffe9, #e977ff);
+      border-radius: 50%;
+      animation: holoFloat 12s linear infinite;
+      box-shadow: 
+        0 0 20px currentColor,
+        0 0 40px currentColor,
+        0 0 60px currentColor;
+    }
+
+    @keyframes holoFloat {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Main Content */
+    .main-container {
+      position: relative;
+      z-index: 10;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+      font-size: 1.1rem;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-button:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.3);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Header */
+    .pose-header {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .pose-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff77e9, #77ffe9, #e977ff, #ffee77);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 3s ease-in-out infinite;
+      text-shadow: 0 0 60px rgba(255,255,255,0.3);
+      margin-bottom: 1rem;
+    }
+
+    @keyframes titleShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .pose-subtitle {
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+
+    /* Pose Icon */
+    .pose-icon-large {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(135deg, #ff77e9, #77ffe9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      box-shadow: 
+        0 30px 60px rgba(0,0,0,0.4),
+        0 0 100px rgba(255,119,198,0.4);
+      animation: iconPulse 4s ease-in-out infinite;
+    }
+
+    .pose-icon-large::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: iconRotate 4s linear infinite;
+      border-radius: 50%;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes iconRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Main Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 4rem;
+    }
+
+    .pose-image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(30px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 
+        0 30px 60px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .pose-image {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 30px;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .pose-image-container:hover .pose-image {
+      transform: scale(1.05);
+    }
+
+    .pose-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .detail-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(30px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 30px;
+      padding: 2.5rem;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(255,119,198,0.1) 0%, 
+        rgba(119,255,198,0.1) 50%, 
+        rgba(255,206,119,0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .detail-card:hover::before {
+      opacity: 1;
+    }
+
+    .detail-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 
+        0 40px 80px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(255,255,255,0.2),
+        0 0 100px rgba(255,119,198,0.2);
+    }
+
+    .detail-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, #ff77e9, #77ffe9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .detail-card p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1rem;
+    }
+
+    .beginner { 
+      background: linear-gradient(135deg, rgba(72,187,120,0.8), rgba(72,187,120,0.4)); 
+      color: white; 
+    }
+    .intermediate { 
+      background: linear-gradient(135deg, rgba(237,137,54,0.8), rgba(237,137,54,0.4)); 
+      color: white; 
+    }
+    .advanced { 
+      background: linear-gradient(135deg, rgba(229,62,62,0.8), rgba(229,62,62,0.4)); 
+      color: white; 
+    }
+
+    .benefits-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .benefits-list li {
+      color: rgba(255,255,255,0.8);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      padding-left: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .benefits-list li:before {
+      content: '✨';
+      position: absolute;
+      left: 0;
+      top: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .benefits-list li:hover {
+      color: white;
+      padding-left: 2.5rem;
+    }
+
+    .benefits-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Instructions Section */
+    .instructions-section {
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .instructions-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(30px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 30px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 30px 60px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    /* Scroll Effects */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      z-index: 1000;
+    }
+
+    .scroll-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #ff77e9, #77ffe9, #e977ff);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .pose-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+      }
+      
+      .back-button {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+      
+      .pose-header {
+        padding: 5rem 1rem 3rem;
+      }
+      
+      .detail-card {
+        padding: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="detail-container">
-    <div class="pose-image">
-      <img id="poseImage" src="images/placeholder.jpg" alt="Yoga Pose" />
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+  
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <div class="ethereal-bg"></div>
+  
+  <div class="light-orb orb-1"></div>
+  <div class="light-orb orb-2"></div>
+  <div class="light-orb orb-3"></div>
+  
+  <div class="particle-system" id="particles"></div>
+  
+  <button class="back-button" onclick="goBack()">
+    ← Back to Poses
+  </button>
+  
+  <div class="main-container">
+    <div class="pose-header">
+      <div class="pose-icon-large" id="poseIcon">🏔️</div>
+      <h1 class="pose-title" id="poseTitle">Mountain Pose</h1>
+      <div class="pose-subtitle">Tadasana</div>
     </div>
-    <div class="pose-info">
-      <h2 id="poseTitle">Pose Title</h2>
-      <p id="poseDescription">Pose description will appear here.</p>
-      <button onclick="goBack()" class="back-button">← Back to Grid</button>
+
+    <div class="content-grid">
+      <div class="pose-image-container">
+        <img id="poseImage" src="images/placeholder.jpg" alt="Yoga Pose" class="pose-image" />
+      </div>
+      
+      <div class="pose-details">
+        <div class="detail-card">
+          <div class="difficulty-badge beginner" id="difficultyBadge">Beginner</div>
+          <h3>About This Pose</h3>
+          <p id="poseDescription">Foundation pose for proper alignment and grounding, connecting earth and sky through mindful presence and awareness.</p>
+        </div>
+        
+        <div class="detail-card">
+          <h3>Benefits</h3>
+          <ul class="benefits-list" id="benefitsList">
+            <li>Improves posture and alignment</li>
+            <li>Promotes body awareness</li>
+            <li>Strengthens thighs, knees, and ankles</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="instructions-section">
+      <div class="instructions-card">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; margin-bottom: 2rem; background: linear-gradient(45deg, #ff77e9, #77ffe9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Step-by-Step Instructions</h3>
+        <p id="instructionsText" style="font-size: 1.2rem; line-height: 2; color: rgba(255,255,255,0.9);">
+          Stand tall with feet together, shoulders relaxed, and arms at your sides. Distribute your weight evenly through your feet. Engage your thigh muscles and lift your kneecaps. Lengthen your spine by reaching the crown of your head toward the sky. Relax your shoulders away from your ears and let your arms hang naturally at your sides.
+        </p>
+      </div>
     </div>
   </div>
 
@@ -25,201 +568,241 @@
     const poses = {
       1: {
         name: "Mountain Pose",
+        sanskrit: "Tadasana",
+        icon: "🏔️",
         image: "images/mountain.JPG",
         difficulty: "Beginner",
         benefits: [
-          "Improves posture",
+          "Improves posture and alignment",
           "Promotes body awareness",
-          "Strengthens thighs, knees, and ankles"
+          "Strengthens thighs, knees, and ankles",
+          "Calms the mind and reduces stress"
         ],
-        description: "Stand tall with feet together, shoulders relaxed, and arms at your sides. Distribute your weight evenly through your feet."
+        description: "Foundation pose for proper alignment and grounding, connecting earth and sky through mindful presence and awareness.",
+        instructions: "Stand tall with feet together, shoulders relaxed, and arms at your sides. Distribute your weight evenly through your feet. Engage your thigh muscles and lift your kneecaps. Lengthen your spine by reaching the crown of your head toward the sky. Relax your shoulders away from your ears and let your arms hang naturally at your sides."
       },
       2: {
         name: "Downward-Facing Dog",
+        sanskrit: "Adho Mukha Svanasana",
+        icon: "🐕",
         image: "images/downwarddog.JPG",
         difficulty: "Beginner",
         benefits: [
           "Stretches hamstrings and calves",
           "Builds upper body strength",
-          "Relieves stress and calms the brain"
+          "Relieves stress and calms the brain",
+          "Energizes the body"
         ],
-        description: "Start on all fours, lift your hips, and straighten your legs to form an inverted V shape."
+        description: "Energizing inversion that strengthens and stretches the entire body while promoting mental clarity and focus.",
+        instructions: "Start on all fours with hands shoulder-width apart. Tuck your toes under and lift your hips up and back, straightening your legs to form an inverted V shape. Press your hands firmly into the mat and lengthen your spine. Pedal your feet to stretch your calves, then hold with both heels reaching toward the floor."
       },
       3: {
         name: "Warrior I",
+        sanskrit: "Virabhadrasana I",
+        icon: "⚔️",
         image: "images/warrior1.JPG",
         difficulty: "Intermediate",
         benefits: [
           "Strengthens legs and arms",
           "Improves focus and balance",
-          "Opens the chest and lungs"
+          "Opens the chest and lungs",
+          "Builds confidence and determination"
         ],
-        description: "Lunge one foot forward with the back leg straight and arms raised overhead."
+        description: "Powerful standing pose building strength, focus, and inner warrior spirit through grounded presence and upward reach.",
+        instructions: "Step your left foot back about 4 feet, turning it out 45 degrees. Bend your right knee directly over your ankle. Square your hips toward the front of the mat. Raise your arms overhead, reaching toward the sky. Hold for several breaths, then repeat on the other side."
       },
       4: {
         name: "Warrior II",
+        sanskrit: "Virabhadrasana II",
+        icon: "🛡️",
         image: "images/warrior2.JPG",
         difficulty: "Intermediate",
         benefits: [
-          "Builds stamina",
+          "Builds stamina and endurance",
           "Strengthens the lower body",
-          "Improves stability and focus"
+          "Improves stability and focus",
+          "Opens hips and chest"
         ],
-        description: "From Warrior I, open your arms to the sides and turn your torso to face sideways."
+        description: "Dynamic pose improving stamina, concentration, and graceful power while maintaining steady presence.",
+        instructions: "From Warrior I, open your hips and torso to face the long side of your mat. Extend your arms parallel to the floor, reaching actively in opposite directions. Gaze over your front hand. Keep your front thigh parallel to the floor and your back leg straight and strong."
       },
       5: {
         name: "Triangle Pose",
+        sanskrit: "Trikonasana",
+        icon: "📐",
         image: "images/triangle.JPG",
         difficulty: "Intermediate",
         benefits: [
           "Stretches legs and spine",
           "Stimulates abdominal organs",
-          "Improves digestion"
+          "Improves digestion",
+          "Relieves stress and anxiety"
         ],
-        description: "Straighten both legs, reach forward, and tilt your upper body to one side, touching the floor or shin."
+        description: "Lateral stretch opening hips, strengthening legs, and creating sacred geometry through mindful extension.",
+        instructions: "Stand with feet wide apart. Turn your right foot out 90 degrees and left foot in 15 degrees. Extend your arms parallel to the floor. Hinge at your hip and reach your right hand toward your right foot, placing it on your shin, ankle, or a block. Extend your left arm toward the ceiling."
       },
       6: {
         name: "Tree Pose",
+        sanskrit: "Vrksasana",
+        icon: "🌳",
         image: "images/tree.JPG",
-        difficulty: "Beginner",
+        difficulty: "Intermediate",
         benefits: [
           "Improves balance and stability",
           "Strengthens thighs, calves, and spine",
-          "Builds concentration"
+          "Builds concentration and focus",
+          "Promotes mental clarity"
         ],
-        description: "Stand on one leg and place the sole of the other foot on your inner thigh or calf. Balance and bring your palms together."
+        description: "Balance pose cultivating focus, stability, and rooted presence while reaching toward infinite possibilities.",
+        instructions: "Stand in Mountain Pose. Shift your weight to your left foot. Place your right foot on your inner left thigh or calf (avoid the knee). Press your foot into your leg and your leg into your foot. Bring your palms together at your heart center or extend your arms overhead like tree branches."
       },
       7: {
         name: "Bridge Pose",
+        sanskrit: "Setu Bandhasana",
+        icon: "🌉",
         image: "images/bridge.JPG",
         difficulty: "Beginner",
         benefits: [
           "Stretches the chest and spine",
           "Strengthens the back, glutes, and hamstrings",
-          "Reduces anxiety and fatigue"
+          "Reduces anxiety and fatigue",
+          "Improves digestion"
         ],
-        description: "Lie on your back with knees bent and feet flat. Lift your hips toward the ceiling while pressing into your feet."
+        description: "Heart opening backbend strengthening the posterior chain while creating space in the chest and shoulders.",
+        instructions: "Lie on your back with knees bent and feet flat on the floor, hip-width apart. Place your arms alongside your body with palms down. Press into your feet and lift your hips toward the ceiling. Keep your knees parallel and engage your glutes. Hold for several breaths."
       },
       8: {
-        name: "Child’s Pose",
+        name: "Child's Pose",
+        sanskrit: "Balasana",
+        icon: "🧘",
         image: "images/child.JPG",
         difficulty: "Beginner",
         benefits: [
           "Gently stretches hips, thighs, and ankles",
           "Relieves back and neck pain",
-          "Promotes relaxation"
+          "Promotes relaxation and introspection",
+          "Calms the nervous system"
         ],
-        description: "Sit on your heels, fold forward, and stretch your arms in front or alongside your body."
+        description: "Restorative pose for deep relaxation and inner contemplation, providing sanctuary and renewal.",
+        instructions: "Kneel on the floor with your big toes touching and your knees hip-width apart. Sit back on your heels, then fold forward, extending your arms in front of you or alongside your body. Rest your forehead on the mat and breathe deeply."
       },
       9: {
         name: "Seated Forward Bend",
+        sanskrit: "Paschimottanasana",
+        icon: "🙇",
         image: "images/seatedforwardbend.JPG",
         difficulty: "Beginner",
         benefits: [
           "Stretches spine and hamstrings",
           "Improves digestion",
-          "Calms the mind"
+          "Calms the mind and nervous system",
+          "Reduces stress and anxiety"
         ],
-        description: "Sit with your legs extended and reach toward your toes, keeping your back straight."
+        description: "Calming forward fold stretching the posterior chain while cultivating introspection and inner peace.",
+        instructions: "Sit with your legs extended straight in front of you. Inhale and lengthen your spine. Exhale and hinge forward from your hips, reaching toward your feet. Keep your back straight and avoid rounding your spine. Hold wherever you feel a comfortable stretch."
       },
       10: {
         name: "Cobra Pose",
+        sanskrit: "Bhujangasana",
+        icon: "🐍",
         image: "images/cobra.JPG",
         difficulty: "Beginner",
         benefits: [
-          "Strengthens the spine",
+          "Strengthens the spine and back muscles",
           "Opens the chest and shoulders",
-          "Improves flexibility"
+          "Improves spinal flexibility",
+          "Stimulates abdominal organs"
         ],
-        description: "Lie on your stomach and press into your hands to lift your chest, keeping elbows bent and close to your body."
+        description: "Gentle backbend opening the heart center while strengthening the spine and awakening inner fire.",
+        instructions: "Lie face down with your palms under your shoulders. Press your pubic bone into the floor and engage your legs. Slowly lift your chest, using your back muscles more than your arms. Keep your shoulders away from your ears and your elbows close to your body."
       },
       11: {
         name: "Camel Pose",
+        sanskrit: "Ustrasana",
+        icon: "🐪",
         image: "images/camel.JPG",
-        difficulty: "Intermediate",
+        difficulty: "Advanced",
         benefits: [
           "Stretches the entire front of the body",
-          "Improves posture",
-          "Stimulates abdominal organs"
+          "Improves posture and spinal flexibility",
+          "Stimulates abdominal organs",
+          "Opens the heart chakra"
         ],
-        description: "Kneel and place your hands on your heels while arching your back and pushing your hips forward."
+        description: "Deep backbend opening the heart chakra and creating profound spinal extension and emotional release.",
+        instructions: "Kneel with shins parallel to each other. Place your hands on your lower back with fingers pointing down. Engage your front body and slowly arch back, reaching for your heels if accessible. Keep your hips moving forward and your head neutral or gently dropped back."
       },
       12: {
         name: "Cat-Cow Pose",
+        sanskrit: "Marjaryasana-Bitilasana",
+        icon: "🐱",
         image: "images/catcow.JPG",
         difficulty: "Beginner",
         benefits: [
-          "Improves spine flexibility",
-          "Warms up the back",
-          "Promotes coordination and breath awareness"
+          "Improves spine flexibility and mobility",
+          "Warms up the back and core",
+          "Promotes coordination and breath awareness",
+          "Relieves tension in the spine"
         ],
-        description: "Alternate between arching your back (cat) and dipping your spine (cow) while on all fours."
+        description: "Flowing movement warming the spine and awakening the connection between breath and movement.",
+        instructions: "Start on all fours with hands under shoulders and knees under hips. Inhale and arch your back, lifting your chest and tailbone (Cow). Exhale and round your spine, dropping your head and tailbone (Cat). Continue flowing between these positions with your breath."
       },
       13: {
         name: "Boat Pose",
+        sanskrit: "Navasana",
+        icon: "⛵",
         image: "images/boat.JPG",
         difficulty: "Intermediate",
         benefits: [
           "Strengthens core and hip flexors",
-          "Improves balance",
-          "Stimulates kidneys and thyroid"
-        ],
-        description: "Sit on the floor, lift your legs and torso into a V shape, and stretch your arms forward."
-      },
-      14: {
-        name: "Plank Pose",
-        image: "images/plank.JPG",
-        difficulty: "Intermediate",
-        benefits: [
-          "Strengthens arms, wrists, and spine",
-          "Tones the abdomen",
-          "Improves posture"
-        ],
-        description: "Hold your body in a straight line from head to heels, supported by your hands and toes."
-      },
-      15: {
-        name: "Chair Pose",
-        image: "images/chair.JPG",
-        difficulty: "Intermediate",
-        benefits: [
-          "Strengthens thighs, calves, and spine",
-          "Improves balance",
-          "Stimulates the heart and diaphragm"
-        ],
-        description: "Bend your knees and sit back as if in a chair, while keeping your arms raised overhead."
-      },
-      16: {
-        name: "Corpse Pose",
-        image: "images/corpse.JPG",
-        difficulty: "Beginner",
-        benefits: [
-          "Promotes total relaxation",
-          "Reduces stress",
-          "Calms the nervous system"
-        ],
-        description: "Lie flat on your back with arms at your sides, palms up, and relax every part of your body."
+          "Improves balance and stability",
+          "Stimulates kidneys and thyroid",
+          "Builds mental focus and resilience"
+      ],
+      description: "Challenging balance pose engaging the core and mind, embodying steadiness in the midst of turbulence.",
+        instructions: "Sit on the floor with your knees bent and feet flat. Lean back slightly and lift your feet so your shins are parallel to the floor. Extend your arms forward at shoulder height. For more challenge, straighten your legs to form a V shape. Keep your spine long and your chest lifted."
       }
     };
 
-    const pose = poses[poseId];
+    // Populate pose content
+    if (poseId && poses[poseId]) {
+      const pose = poses[poseId];
+      document.getElementById("poseTitle").textContent = pose.name;
+      document.querySelector(".pose-subtitle").textContent = pose.sanskrit;
+      document.getElementById("poseIcon").textContent = pose.icon;
+      document.getElementById("poseImage").src = pose.image;
+      document.getElementById("poseDescription").textContent = pose.description;
+      document.getElementById("instructionsText").textContent = pose.instructions;
 
-    if (pose) {
-      document.getElementById('poseImage').src = pose.image;
-      document.getElementById('poseImage').onerror = function () {
-        this.src = 'images/placeholder.jpg';
-      };
-      document.getElementById('poseTitle').textContent = pose.name;
+      const badge = document.getElementById("difficultyBadge");
+      badge.textContent = pose.difficulty;
+      badge.className = `difficulty-badge ${pose.difficulty.toLowerCase()}`;
 
-      const benefitsList = pose.benefits.map(b => `<li>${b}</li>`).join('');
-      document.getElementById('poseDescription').innerHTML = `
-        <strong>Difficulty:</strong> ${pose.difficulty}<br/><br/>
-        ${pose.description}<br/><br/>
-        <strong>Benefits:</strong><ul>${benefitsList}</ul>
-      `;
-    } else {
-      document.getElementById('poseTitle').textContent = "Unknown Pose";
-      document.getElementById('poseDescription').textContent = "Pose details not found.";
+      const benefitsList = document.getElementById("benefitsList");
+      benefitsList.innerHTML = "";
+      pose.benefits.forEach(benefit => {
+        const li = document.createElement("li");
+        li.textContent = benefit;
+        benefitsList.appendChild(li);
+      });
     }
+
+    // Custom cursor animation
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      follower.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+    });
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.querySelector('.scroll-progress');
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      scrollProgress.style.width = `${scrollPercent}%`;
+    });
 
     function goBack() {
       window.history.back();
